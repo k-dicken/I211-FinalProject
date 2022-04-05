@@ -29,10 +29,70 @@ p {
 
 /* HEADER STYLES */
 header {
-    height: 200px;
+    min-height: 60px;
+    width: 100%;
+    padding: 10px 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+
+    background-color: transparent;
+}
+
+header a {
+    margin-right: 40px;
+
+    color: white;
+    font-size: large;
+    text-decoration: none;
+    text-transform: lowercase;
+}
+
+header a:hover {
+    color: darkorange;
 }
 
 /* HOME PAGE */
+#hero {
+    min-height: 100vh;
+    width: 100%;
 
+    background-color: skyblue;
+
+    background-image: linear-gradient(0deg, rgba(255,255,255,1) 15%, rgba(255,255,255,0) 85%),  url(../img/hero.jpeg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#section {
+    min-height: 50vh;
+    width: 100%;
+    padding: 20px 10%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
 
 /* FOOTER STYLES */
+footer {
+    min-height: 50vh;
+    width: 100%;
+    padding: 20px 5%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    color: white;
+    text-decoration: none;
+    text-align: center;
+
+    background-color: #8DC4CE;
+}
