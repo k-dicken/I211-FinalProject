@@ -9,6 +9,7 @@ class FlightDetail extends IndexView {
         $flightNum = $flight->getFlightNum();
         $date = $flight->getDate();
         $airline = $flight->getAirline();
+        $planeType = $flight->getPlaneType();
         $fromLocation = $flight->getFromLocation();
         $toLocation = $flight->getToLocation();
         $departTime = substr($flight->getDepartTime(), 0, 5);
@@ -23,8 +24,9 @@ class FlightDetail extends IndexView {
                 <p class='flight-title' style='font-size: xx-large'>FLIGHT DETAILS</p>
                 <p style='font-size: large'>$date</p>
                 <br>
-                <br>
                 <p class='flight-airline' style='font-size: x-large; font-weight: bold'>$airline</p>
+                <p class='flight-airline' style='font-size: large'>$planeType</p>
+                <br>
                 <br>
                 <br>
                 <div class='flight-section flight-destination'>

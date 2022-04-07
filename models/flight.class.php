@@ -1,11 +1,12 @@
 <?php
 
 class Flight {
-    private $flightNum, $airline, $fromLocation, $toLocation, $capacity, $date, $departTime, $arriveTime, $gate, $availability, $status;
+    private $flightNum, $airline, $planeType, $fromLocation, $toLocation, $capacity, $date, $departTime, $arriveTime, $gate, $availability, $status;
 
-    public function __construct($airline, $fromLocation, $toLocation, $capacity, $date, $departTime, $arriveTime, $gate, $status, $availability)
+    public function __construct($airline, $planeType, $fromLocation, $toLocation, $capacity, $date, $departTime, $arriveTime, $gate, $status, $availability)
     {
         $this->airline = $airline;
+        $this->planeType = $planeType;
         $this->fromLocation = $fromLocation;
         $this->toLocation = $toLocation;
         $this->capacity = $capacity;
@@ -26,6 +27,11 @@ class Flight {
     public function getAirline()
     {
         return $this->airline;
+    }
+
+    public function getPlaneType()
+    {
+        return $this->planeType;
     }
 
     public function getToLocation()

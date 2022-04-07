@@ -6,6 +6,7 @@ class FlightModel {
     private $dbConnection;
     static private $_instance = NULL;
     private $tblFlights;
+    private $tblPlanes;
 
     //To use singleton pattern, this constructor is made private. To get an instance of the class, the getMovieModel method must be called.
     public function __construct()
@@ -13,6 +14,7 @@ class FlightModel {
         $this->db = Database::getDatabase();
         $this->dbConnection = $this->db->getConnection();
         $this->tblFlights = $this->db->getFlightsTable();
+        $this->tblPlanes = $this->db->getPlanesTable();
 
         //Escapes special characters in a string for use in an SQL statement. This stops SQL inject in POST vars.
         foreach ($_POST as $key => $value) {
@@ -34,7 +36,8 @@ class FlightModel {
     }
 
     public function list_flights() {
-        $sql = "SELECT * FROM " . $this->tblFlights . "WHERE" . $this->tblFlights;
+//        $sql = "SELECT * FROM " . $this->tblFlights;
+        $sql = "SELECT * FROM " . $this->tblFlights . ", " . $this->tblPlanes . " WHERE " . $this->tblFlights . ".planeNum = " . $this->tblPlanes . ".planeNum";
 
         //execute the query
         $query = $this->dbConnection->query($sql);
@@ -53,21 +56,34 @@ class FlightModel {
 
         //loop through all rows in the returned record sets
         while ($obj = $query->fetch_object()) {
-            $flight = new Flight(stripslashes($obj->airline), stripslashes($obj->fromLocation), stripslashes($obj->toLocation), stripslashes($obj->capacity), stripslashes($obj->date), stripslashes($obj->departTime), stripslashes($obj->arriveTime), stripslashes($obj->gate), stripslashes($obj->status), stripslashes($obj->availability));
+            $flight = new Flight(stripslashes($obj->airline),
+                stripslashes($obj->planeType),
+                stripslashes($obj->fromLocation),
+                stripslashes($obj->toLocation),
+                stripslashes($obj->capacity),
+                stripslashes($obj->date),
+                stripslashes($obj->departTime),
+                stripslashes($obj->arriveTime),
+                stripslashes($obj->gate),
+                stripslashes($obj->status),
+                stripslashes($obj->availability));
 
             //set the id for the flight
             $flight->setFlightNum($obj->flightNum);
 
-            //add the movie into the array
+            //add the flight into the array
             $flights[] = $flight;
+
+            echo $obj->planeType;
         }
+
+
         return $flights;
     }
 
     public function view_flight($flightNum) {
         //the select sql statement
-        $sql = "SELECT * FROM " . $this->tblFlights .
-            " WHERE " . $this->tblFlights . ".flightNum='$flightNum'";
+        $sql = "SELECT * FROM " . $this->tblFlights . ", " . $this->tblPlanes . " WHERE " . $this->tblFlights . ".flightNum = 1 AND " . $this->tblFlights . ".planeNum = " . $this->tblPlanes . ".planeNum";
 
         //execute the query
         $query = $this->dbConnection->query($sql);
@@ -75,8 +91,8 @@ class FlightModel {
         if ($query && $query->num_rows > 0) {
             $obj = $query->fetch_object();
 
-            //create a movie object
-            $flight = new Flight(stripslashes($obj->airline), stripslashes($obj->fromLocation), stripslashes($obj->toLocation), stripslashes($obj->capacity), stripslashes($obj->date), stripslashes($obj->departTime), stripslashes($obj->arriveTime), stripslashes($obj->gate), stripslashes($obj->status), stripslashes($obj->availability));
+            //create a flight object
+            $flight = new Flight(stripslashes($obj->airline), stripslashes($obj->planeType), stripslashes($obj->fromLocation), stripslashes($obj->toLocation), stripslashes($obj->capacity), stripslashes($obj->date), stripslashes($obj->departTime), stripslashes($obj->arriveTime), stripslashes($obj->gate), stripslashes($obj->status), stripslashes($obj->availability));
 
             //set the id for the flight
             $flight->setFlightNum($obj->flightNum);
