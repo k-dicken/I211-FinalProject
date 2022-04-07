@@ -20,8 +20,9 @@ class FlightDetail extends IndexView {
 
         echo "<div id='flight-details'>
             <div class='flight-details-section'>
-                <p class='flight-title'>FLIGHT DETAILS</p>
+                <p class='flight-title' style='font-size: xx-large'>FLIGHT DETAILS</p>
                 <p style='font-size: large'>$date</p>
+                <br>
                 <br>
                 <p class='flight-airline' style='font-size: x-large; font-weight: bold'>$airline</p>
                 <br>
@@ -55,5 +56,6 @@ class FlightDetail extends IndexView {
 
 
 <?php
+        parent::displayFooter();
     }
 }
