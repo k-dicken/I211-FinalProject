@@ -1,7 +1,7 @@
 <?php
 
 class IndexView{
-    static public function displayHeader($pageTitle) {
+    static public function displayHeader($pageTitle, $color) {
         ?>
 
         <!doctype html>
@@ -12,13 +12,22 @@ class IndexView{
                   content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
             <meta http-equiv="X-UA-Compatible" content="ie=edge">
             <title>Skyline | <?= $pageTitle ?></title>
-            <link rel="stylesheet" href="www/css/styles.css">
+            <link rel="stylesheet" href="<?= BASE_URL ?>www/css/styles.css">
+            <style>
+                header a {
+                    color: <?= $color ?>;
+                }
+            </style>
+            <script>
+                //create the JavaScript variable for the base url
+                var base_url = "<?= BASE_URL ?>";
+            </script>
         </head>
         <body>
         <header>
             <nav>
-                <a href="index.php">Home</a>
-                <a href="">Flights</a>
+                <a href="<?= BASE_URL ?>index.php">Home</a>
+                <a href="<?= BASE_URL ?>flight/index">Flights</a>
                 <a href="">About</a>
             </nav>
             <a href="index.php"><img src="" alt="" class="logo"></a>

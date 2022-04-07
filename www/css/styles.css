@@ -5,6 +5,10 @@
  * Description: styles sheet
  */
 
+@font-face {
+    font-family: FreeMono, monospace;
+}
+
 /* BASIC STYLES */
 * {
     margin: 0;
@@ -24,7 +28,30 @@ h4,
 h5,
 h6,
 p {
+    font-family: FreeMono, monospace;
     margin-bottom: 16px;
+}
+
+a,
+input,
+label,
+button {
+    font-family: FreeMono, monospace;
+}
+
+button {
+    padding: 14px 40px;
+    margin: 20px auto 0 auto;
+
+    color: white;
+    font-size: medium;
+
+    background-color: steelblue;
+    border: transparent;
+}
+
+button:hover {
+    background-color: crimson;
 }
 
 /* HEADER STYLES */
@@ -44,14 +71,17 @@ header {
 header a {
     margin-right: 40px;
 
-    color: white;
     font-size: large;
     text-decoration: none;
     text-transform: lowercase;
 }
 
 header a:hover {
-    color: darkorange;
+    color: crimson;
+}
+
+.header-space {
+    height: 60px;
 }
 
 /* HOME PAGE */
@@ -59,12 +89,24 @@ header a:hover {
     min-height: 100vh;
     width: 100%;
 
-    background-color: skyblue;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: column;
 
+    background-color: steelblue;
     background-image: linear-gradient(0deg, rgba(255,255,255,1) 15%, rgba(255,255,255,0) 85%),  url(../img/hero.jpeg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+#hero h1 {
+    margin-bottom: 180px;
+
+    font-size: xxx-large;
+    text-transform: lowercase;
+    color: white;
 }
 
 #section {
@@ -79,7 +121,158 @@ header a:hover {
     text-align: center;
 }
 
-/* FOOTER STYLES */
+/* SEARCH */
+
+#search {
+    padding: 2% 6%;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    background-color: white;
+}
+
+.search-flight {
+    width: 100%;
+}
+
+.search-home {
+    height: 350px;
+    width: 700px;
+    margin-bottom: 80px;
+
+    /*border-bottom: lightgrey 2px solid;*/
+}
+
+#search .section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+#search .sub-section {
+    width: 30%;
+}
+
+#search .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+#search .row .input {
+    display: flex;
+    flex-direction: column;
+}
+
+#search label {
+    margin-bottom: 16px;
+    color: steelblue;
+}
+
+#search input {
+    padding: 4px 6px;
+    margin-bottom: 40px;
+
+    border: transparent;
+    border-bottom: lightgrey 1px solid;
+}
+
+#search .destination-input {
+    width: 140px;
+}
+
+/* FLIGHTS PAGE */
+
+#flights {
+    min-height: 80%;
+    width: 100%;
+    margin: 40px 0 100px 0;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#flights .flight {
+    min-width: 60%;
+    padding: 40px 60px;
+    margin-bottom: 60px;
+
+    display: flex;
+    flex-direction: column;
+
+    border-bottom: lightgrey 1px solid;
+}
+
+#flights .flight:hover {
+    background-color: lightgrey;
+}
+
+.flight-section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flight-destination {
+    font-size: x-large;
+}
+
+.flight-availability {
+    margin-bottom: 0;
+}
+
+.flight-times {
+    font-size: large;
+    margin-bottom: 16px;
+}
+
+.flight a {
+    color: steelblue;
+    text-decoration: none;
+}
+
+.flight-title {
+    font-size: xx-large;
+    color: steelblue;
+}
+
+/* FLIGHT DETAILS */
+#flight-details {
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    background-color: steelblue;
+    background-image: linear-gradient(0deg, rgba(255,255,255,1) 15%, rgba(255,255,255,0) 85%),  url(../img/hero.jpeg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#flight-details .flight-details-section {
+    height: 80%;
+    width: 80%;
+
+    padding: 4% 10%;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    background-color: white;
+}
+
+    /* FOOTER STYLES */
 footer {
     min-height: 50vh;
     width: 100%;
@@ -94,5 +287,5 @@ footer {
     text-decoration: none;
     text-align: center;
 
-    background-color: #8DC4CE;
+    background-color: steelblue;
 }

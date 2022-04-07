@@ -2,12 +2,34 @@
 
 class HomeIndex extends IndexView {
     public function display() {
-        parent::displayHeader("Home");
-        ?>
+        parent::displayHeader("Home", "white");
+?>
 
-        <div id="hero">
-        <form action="search">
-            <input name="" type="text">
+    <div id="hero">
+        <h1>Skyline</h1>
+        <form id="search" class="search-home" action="search">
+            <p class="search-title"></p>
+
+            <div class="row">
+                <div class="input">
+                    <label for="from">FROM</label>
+                    <input name="from" type="text" minlength="3" maxlength="3">
+                </div>
+
+                <p class="search-arrow">➝</p>
+
+            <div class="input">
+                <label for="to">TO</label>
+                <input name="to" type="text" minlength="3" maxlength="3">
+
+            </div>
+            </div>
+
+
+            <label for="depart">DEPART</label>
+            <input name="depart" type="date">
+
+            <button type="submit">SEARCH</button>
         </form>
     </div>
 

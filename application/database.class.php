@@ -49,7 +49,7 @@ class Database {
     }
 
     //returns the name of the table that stores flights
-    public function getFlightTable() {
+    public function getFlightsTable() {
         return $this->param['tblFlights'];
     }
 

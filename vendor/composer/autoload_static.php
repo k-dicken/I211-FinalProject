@@ -15,6 +15,7 @@ class ComposerStaticInit06ef10d7858b7c538880ca8e3014b021
         'Dispatcher' => __DIR__ . '/../..' . '/application/dispatcher.class.php',
         'Flight' => __DIR__ . '/../..' . '/models/flight.class.php',
         'FlightController' => __DIR__ . '/../..' . '/controllers/flight_controller.class.php',
+        'FlightDetail' => __DIR__ . '/../..' . '/views/flight/detail/flight_detail.class.php',
         'FlightIndex' => __DIR__ . '/../..' . '/views/flight/index/flight_index.class.php',
         'FlightIndexView' => __DIR__ . '/../..' . '/views/flight/flight_index_view.class.php',
         'FlightModel' => __DIR__ . '/../..' . '/models/flight_model.class.php',
