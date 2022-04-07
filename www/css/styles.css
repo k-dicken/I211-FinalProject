@@ -54,6 +54,12 @@ button:hover {
     background-color: crimson;
 }
 
+.logo {
+    text-decoration: none;
+    color: white;
+    font-size: x-large;
+}
+
 /* HEADER STYLES */
 header {
     min-height: 60px;
@@ -135,6 +141,7 @@ header a:hover {
 
 .search-flight {
     width: 100%;
+    flex-wrap: wrap;
 }
 
 .search-home {
@@ -218,6 +225,7 @@ header a:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .flight-airline {

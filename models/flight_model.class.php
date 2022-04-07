@@ -34,7 +34,7 @@ class FlightModel {
     }
 
     public function list_flights() {
-        $sql = "SELECT * FROM " . $this->tblFlights;
+        $sql = "SELECT * FROM " . $this->tblFlights . "WHERE" . $this->tblFlights;
 
         //execute the query
         $query = $this->dbConnection->query($sql);

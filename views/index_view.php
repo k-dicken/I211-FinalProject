@@ -41,7 +41,9 @@ class IndexView{
         ?>
 
         <footer>
-            <a href="index.php"><img src="" alt="" class="logo"></a>
+            <a class="logo" href="<?= BASE_URL ?>">skyline</a>
+            <br>
+            <br>
             <p class="footer-address">12345 Skies Lane San Francisco, California 67890</p>
             <p class="footer-phone">(901) 123-4567</p>
             <br>
