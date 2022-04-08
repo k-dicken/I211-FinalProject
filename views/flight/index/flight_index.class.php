@@ -14,7 +14,6 @@ class FlightIndex extends FlightIndexView {
 
         <div id="flights">
         <?php
-        $baseURL = BASE_URL;
 
                 if ($flights === 0) {
                     echo "No flights were found.";

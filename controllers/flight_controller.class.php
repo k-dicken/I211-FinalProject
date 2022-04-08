@@ -41,4 +41,34 @@ class FlightController {
         $view = new FlightDetail();
         $view->display($flight);
     }
+
+    //search movies
+    public function search() {
+        //retrieve query terms from search form
+        $to = trim($_GET['to']);
+        $from = trim($_GET['from']);
+        $depart = trim($_GET['depart']);
+
+        $terms = array($to, $from, $depart);
+
+        foreach ($terms as $term) {
+            //if search term is empty, list all flights
+            if ($term == "") {
+                $this->index();
+            }
+        }
+
+        //search the database for matching movies
+        $flights = $this->flightModel->search_flights($to, $from, $depart);
+
+        if ($flights === false) {
+            //handle error
+            $message = "An error has occurred.";
+            $this->error($message);
+            return;
+        }
+        //display matched movies
+        $search = new FlightSearch();
+        $search->display($to, $from, $depart, $flights);
+    }
 }

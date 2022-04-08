@@ -255,6 +255,11 @@ header a:hover {
     color: steelblue;
 }
 
+.flight-search-title {
+    margin: 0 auto;
+    font-size: x-large;
+}
+
 /* FLIGHT DETAILS */
 #flight-details {
     width: 100%;

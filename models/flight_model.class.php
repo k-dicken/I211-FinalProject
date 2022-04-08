@@ -37,7 +37,8 @@ class FlightModel {
 
     public function list_flights() {
 //        $sql = "SELECT * FROM " . $this->tblFlights;
-        $sql = "SELECT * FROM " . $this->tblFlights . ", " . $this->tblPlanes . " WHERE " . $this->tblFlights . ".planeNum = " . $this->tblPlanes . ".planeNum";
+        $sql = "SELECT * FROM " . $this->tblFlights . ", " . $this->tblPlanes .
+            " WHERE " . $this->tblFlights . ".planeNum = " . $this->tblPlanes . ".planeNum";
 
         //execute the query
         $query = $this->dbConnection->query($sql);
@@ -74,7 +75,6 @@ class FlightModel {
             //add the flight into the array
             $flights[] = $flight;
 
-            echo $obj->planeType;
         }
 
 
@@ -83,7 +83,8 @@ class FlightModel {
 
     public function view_flight($flightNum) {
         //the select sql statement
-        $sql = "SELECT * FROM " . $this->tblFlights . ", " . $this->tblPlanes . " WHERE " . $this->tblFlights . ".flightNum = 1 AND " . $this->tblFlights . ".planeNum = " . $this->tblPlanes . ".planeNum";
+        $sql = "SELECT * FROM " . $this->tblFlights . ", " . $this->tblPlanes .
+            " WHERE " . $this->tblFlights . ".flightNum = 1 AND " . $this->tblFlights . ".planeNum = " . $this->tblPlanes . ".planeNum";
 
         //execute the query
         $query = $this->dbConnection->query($sql);
@@ -101,6 +102,55 @@ class FlightModel {
         }
 
         return false;
+    }
+
+    //search the database for movies that match words in titles. Return an array of movies if succeed; false otherwise.
+    public function search_flights($to, $from, $depart) {
+//        $terms = explode(" ", $terms); //explode multiple terms into an array
+        //select statement for AND serach
+        $sql = "SELECT * FROM " . $this->tblFlights . ", " . $this->tblPlanes .
+            " WHERE " . $this->tblFlights . ".planeNum = " . $this->tblPlanes . ".planeNum AND (1";
+
+        if ($to != "") {
+            $sql .= " AND toLocation LIKE '%" . $to . "%'";
+        }
+        if ($from != "") {
+            $sql .= " AND fromLocation LIKE '%" . $from . "%'";
+        }
+        if ($depart != "") {
+            $sql .= " AND date LIKE '%" . $depart . "%'";
+        }
+
+        $sql .= ")";
+
+        echo $sql;
+
+        //execute the query
+        $query = $this->dbConnection->query($sql);
+
+        // the search failed, return false.
+        if (!$query)
+            return false;
+
+        //search succeeded, but no movie was found.
+        if ($query->num_rows == 0)
+            return 0;
+
+        //search succeeded, and found at least 1 movie found.
+        //create an array to store all the returned movies
+        $flights = array();
+
+        //loop through all rows in the returned recordsets
+        while ($obj = $query->fetch_object()) {
+            $flight = new Flight(stripslashes($obj->airline), stripslashes($obj->planeType), stripslashes($obj->fromLocation), stripslashes($obj->toLocation), stripslashes($obj->capacity), stripslashes($obj->date), stripslashes($obj->departTime), stripslashes($obj->arriveTime), stripslashes($obj->gate), stripslashes($obj->status), stripslashes($obj->availability));
+
+            //set the id for the movie
+            $flight->setFlightNum($obj->flightNum);
+
+            //add the movie into the array
+            $flights[] = $flight;
+        }
+        return $flights;
     }
 
 

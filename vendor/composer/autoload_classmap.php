@@ -18,6 +18,7 @@ return array(
     'FlightIndex' => $baseDir . '/views/flight/index/flight_index.class.php',
     'FlightIndexView' => $baseDir . '/views/flight/flight_index_view.class.php',
     'FlightModel' => $baseDir . '/models/flight_model.class.php',
+    'FlightSearch' => $baseDir . '/views/flight/search/flight_search.class.php',
     'HomeController' => $baseDir . '/controllers/home_controller.class.php',
     'HomeIndex' => $baseDir . '/views/home/home_index.class.php',
     'IndexView' => $baseDir . '/views/index_view.php',
