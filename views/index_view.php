@@ -1,6 +1,6 @@
 <?php
 
-class IndexView{
+class IndexView {
     static public function displayHeader($pageTitle, $color) {
         ?>
 
@@ -28,10 +28,9 @@ class IndexView{
             <nav>
                 <a href="<?= BASE_URL ?>index.php">Home</a>
                 <a href="<?= BASE_URL ?>flight/index">Flights</a>
-                <a href="">About</a>
             </nav>
             <a href="index.php"><img src="" alt="" class="logo"></a>
-            <a href="">Login</a>
+            <a href="<?= BASE_URL ?>user/login">Login</a>
         </header>
 
         <?php

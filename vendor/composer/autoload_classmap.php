@@ -23,4 +23,8 @@ return array(
     'HomeIndex' => $baseDir . '/views/home/home_index.class.php',
     'IndexView' => $baseDir . '/views/index_view.php',
     'UserController' => $baseDir . '/controllers/user_controller.class.php',
+    'UserIndex' => $baseDir . '/views/user/index/user_index.class.php',
+    'UserLogin' => $baseDir . '/views/user/login/user_login.class.php',
+    'UserModel' => $baseDir . '/models/user_model.class.php',
+    'UserVerify' => $baseDir . '/views/user/verify/user_verify.php',
 );

@@ -77,7 +77,6 @@ class FlightModel {
 
         }
 
-
         return $flights;
     }
 

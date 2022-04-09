@@ -1,6 +1,10 @@
 <?php
 
-class UserController
-{
+class UserController {
+
+    public function login() {
+        $view = new UserLogin();
+        $view->display();
+    }
 
 }

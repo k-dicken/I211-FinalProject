@@ -7,18 +7,22 @@ require_once ("vendor/autoload.php");
 
 $index = new IndexView();
 //$flightModel = new FlightModel();
+//
+//$flightModel = new FlightModel();
+//$flights = $flightModel->search_flights("DWA");
+//
+//echo "test0";
+//$search = new FlightSearch();
+//echo "test1";
+//$search->display("DWA", $flights);
+//echo "test2";
 
-$flightModel = new FlightModel();
-$flights = $flightModel->search_flights("DWA");
-
-echo "test0";
-$search = new FlightSearch();
-echo "test1";
-$search->display("DWA", $flights);
-echo "test2";
-
-//$index->displayHeader("test", "white");
+$index->displayHeader("test", "black");
 //?>
+
+
+
+
 <!--    <div id="flight-details">-->
 <!--        <div class="flight-details-section">-->
 <!--            <p class='flight-title'>FLIGHT DETAILS</p>-->
@@ -121,4 +125,4 @@ echo "test2";
 
 <?php
 
-//$index->displayFooter();
+$index->displayFooter();

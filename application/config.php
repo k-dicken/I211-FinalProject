@@ -1,6 +1,6 @@
 <?php
 /*
- * Author: Kylee
+ * Author: Kylee Dicken
  * Date: Apr 4, 2022
  * File: config.php
  * Description: set application settings

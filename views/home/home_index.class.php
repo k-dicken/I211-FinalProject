@@ -7,7 +7,7 @@ class HomeIndex extends IndexView {
 
     <div id="hero">
         <h1>Skyline</h1>
-        <form id="search" class="search-home" action="search">
+        <form id="search" class="search-home" method="get" action="<?= BASE_URL ?>flight/search">
             <br>
             <div class="row">
                 <div class="input">
@@ -17,13 +17,12 @@ class HomeIndex extends IndexView {
 
                 <p class="search-arrow">➝</p>
 
-            <div class="input">
-                <label for="to">TO</label>
-                <input name="to" type="text" minlength="3" maxlength="3">
+                <div class="input">
+                    <label for="to">TO</label>
+                    <input name="to" type="text" minlength="3" maxlength="3">
 
+                </div>
             </div>
-            </div>
-
 
             <label for="depart">DEPART</label>
             <input name="depart" type="date">
