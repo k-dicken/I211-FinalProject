@@ -17,6 +17,7 @@ class Database {
         'password' => 'phpuser',
         'database' => 'skyline',
         'tblFlights' => 'flights',
+        'tblFlightsUsers' => 'flights_users',
         'tblPlanes' => 'planes',
         'tblUsers' => 'users'
     );
@@ -51,6 +52,11 @@ class Database {
     //returns the name of the table that stores flights
     public function getFlightsTable() {
         return $this->param['tblFlights'];
+    }
+
+    //returns the name of the table that stores flights
+    public function getFlightsUsersTable() {
+        return $this->param['tblFlightsUsers'];
     }
 
     //returns the name of the table that stores seats

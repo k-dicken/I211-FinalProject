@@ -3,17 +3,22 @@
 class UserLogin extends IndexView {
 
     public function display() {
-
         parent::displayHeader("Login", "black");
+
+        if (trim($_GET['message']) != "") {
+            $message = "Email or Password incorrect, please try again.";
+        }
 
         ?>
 
         <form id="user-login" method="get" action="<?= BASE_URL ?>user/verify">
-            <label for="email">Email</label>
+            <label for="email">Email<span>*</span></label>
             <input name="email" type="email" required>
 
-            <label for="password">Password</label>
-            <input name="password" type="password" required>
+            <label for="password">Password<span>*</span></label>
+            <input name="password" type="text" required>
+
+            <p class="login-message"><?= $message ?></p>
 
             <button type="submit">Login</button>
 

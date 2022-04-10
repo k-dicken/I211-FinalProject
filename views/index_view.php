@@ -2,6 +2,15 @@
 
 class IndexView {
     static public function displayHeader($pageTitle, $color) {
+        session_start();
+
+        if (isset($_SESSION['userNum'])
+            && isset($_SESSION['admin'])) {
+
+            $userNum = $_SESSION['userNum'];
+            $admin = $_SESSION['admin'];
+        }
+
         ?>
 
         <!doctype html>
@@ -13,6 +22,8 @@ class IndexView {
             <meta http-equiv="X-UA-Compatible" content="ie=edge">
             <title>Skyline | <?= $pageTitle ?></title>
             <link rel="stylesheet" href="<?= BASE_URL ?>www/css/styles.css">
+            <link rel="icon" href="https://www.freeiconspng.com/thumbs/airplane-icon-png/transport-airplane-takeoff-icon--android-iconset--icons8-2.png
+            ">
             <style>
                 header a {
                     color: <?= $color ?>;
@@ -29,8 +40,26 @@ class IndexView {
                 <a href="<?= BASE_URL ?>index.php">Home</a>
                 <a href="<?= BASE_URL ?>flight/index">Flights</a>
             </nav>
-            <a href="index.php"><img src="" alt="" class="logo"></a>
-            <a href="<?= BASE_URL ?>user/login">Login</a>
+            <nav>
+            <?php
+                if($admin == 1) {
+                    ?>
+                    <a href="<?= BASE_URL ?>flight/create">Create</a>
+                    <?php
+                }
+
+                if($userNum != "") {
+                    ?>
+                    <a href="<?= BASE_URL ?>user/detail/<?= $userNum ?>">Profile</a>
+                    <?php
+                } else {
+                    ?>
+                    <a href="<?= BASE_URL ?>user/login">Login</a>
+                    <?php
+                }
+            ?>
+            </nav>
+
         </header>
 
         <?php

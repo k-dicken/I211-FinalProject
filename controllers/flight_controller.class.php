@@ -5,11 +5,11 @@ class FlightController {
 
     //default constructor
     public function __construct() {
-        //create an instance of the MovieModel class
+        //create an instance of the FlightModel class
         $this->flightModel = FlightModel::getFlightModel();
     }
 
-    //index action that displays all movies
+    //index action that displays all flights
     public function index() {
         //retrieve all flights and store them in an array
         $flights = $this->flightModel->list_flights();
@@ -27,7 +27,7 @@ class FlightController {
     }
 
     public function detail($flightNum) {
-        //retrieve the specific movie
+        //retrieve the specific flight
         $flight = $this->flightModel->view_flight($flightNum);
 
         if (!$flight) {
@@ -37,28 +37,28 @@ class FlightController {
             return;
         }
 
-        //display movie details
+        //display flights details
         $view = new FlightDetail();
         $view->display($flight);
     }
 
-    //search movies
+    //search flights
     public function search() {
         //retrieve query terms from search form
         $to = trim($_GET['to']);
         $from = trim($_GET['from']);
         $depart = trim($_GET['depart']);
 
-        $terms = array($to, $from, $depart);
+//        $terms = array($to, $from, $depart);
+//
+//        foreach ($terms as $term) {
+//            //if search term is empty, list all flights
+//            if ($term == "") {
+//                $this->index();
+//            }
+//        }
 
-        foreach ($terms as $term) {
-            //if search term is empty, list all flights
-            if ($term == "") {
-                $this->index();
-            }
-        }
-
-        //search the database for matching movies
+        //search the database for matching flights
         $flights = $this->flightModel->search_flights($to, $from, $depart);
 
         if ($flights === false) {
@@ -67,8 +67,25 @@ class FlightController {
             $this->error($message);
             return;
         }
-        //display matched movies
+        //display matched flights
         $search = new FlightSearch();
         $search->display($to, $from, $depart, $flights);
+    }
+
+    //search flights
+    public function user($userNum) {
+        //search the database for matching flights
+        $flights = $this->flightModel->user_flights($userNum);
+
+        if ($flights === false) {
+            //handle error
+            $message = "An error has occurred.";
+            $this->error($message);
+            return;
+        }
+
+        //display matched flights
+        $search = new FlightUser();
+        $search->display($flights);
     }
 }

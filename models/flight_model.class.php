@@ -6,6 +6,7 @@ class FlightModel {
     private $dbConnection;
     static private $_instance = NULL;
     private $tblFlights;
+    private $tblFlightsUsers;
     private $tblPlanes;
 
     //To use singleton pattern, this constructor is made private. To get an instance of the class, the getMovieModel method must be called.
@@ -14,6 +15,7 @@ class FlightModel {
         $this->db = Database::getDatabase();
         $this->dbConnection = $this->db->getConnection();
         $this->tblFlights = $this->db->getFlightsTable();
+        $this->tblFlightsUsers = $this->db->getFlightsUsersTable();
         $this->tblPlanes = $this->db->getPlanesTable();
 
         //Escapes special characters in a string for use in an SQL statement. This stops SQL inject in POST vars.
@@ -103,12 +105,11 @@ class FlightModel {
         return false;
     }
 
-    //search the database for movies that match words in titles. Return an array of movies if succeed; false otherwise.
+    //search the database for flights that match parameters
     public function search_flights($to, $from, $depart) {
-//        $terms = explode(" ", $terms); //explode multiple terms into an array
-        //select statement for AND serach
+
         $sql = "SELECT * FROM " . $this->tblFlights . ", " . $this->tblPlanes .
-            " WHERE " . $this->tblFlights . ".planeNum = " . $this->tblPlanes . ".planeNum AND (1";
+            " WHERE " . $this->tblFlights . ".planeNum = " . $this->tblPlanes . ".planeNum";
 
         if ($to != "") {
             $sql .= " AND toLocation LIKE '%" . $to . "%'";
@@ -120,7 +121,40 @@ class FlightModel {
             $sql .= " AND date LIKE '%" . $depart . "%'";
         }
 
-        $sql .= ")";
+        echo $sql;
+
+        //execute the query
+        $query = $this->dbConnection->query($sql);
+
+        // the search failed, return false.
+        if (!$query)
+            return false;
+
+        //search succeeded, but no movie was found.
+        if ($query->num_rows == 0)
+            return 0;
+
+        //search succeeded, and found at least 1 movie found.
+        //create an array to store all the returned movies
+        $flights = array();
+
+        //loop through all rows in the returned recordsets
+        while ($obj = $query->fetch_object()) {
+            $flight = new Flight(stripslashes($obj->airline), stripslashes($obj->planeType), stripslashes($obj->fromLocation), stripslashes($obj->toLocation), stripslashes($obj->capacity), stripslashes($obj->date), stripslashes($obj->departTime), stripslashes($obj->arriveTime), stripslashes($obj->gate), stripslashes($obj->status), stripslashes($obj->availability));
+
+            //set the id for the movie
+            $flight->setFlightNum($obj->flightNum);
+
+            //add the movie into the array
+            $flights[] = $flight;
+        }
+        return $flights;
+    }
+    //search the database for flights that match words in titles. Return an array of movies if succeed; false otherwise.
+    public function user_flights($userNum) {
+
+        $sql = "SELECT * FROM " . $this->tblFlights . ", " . $this->tblPlanes . ", " . $this->tblFlightsUsers .
+            " WHERE " . $this->tblFlightsUsers . ".userNum='" . $userNum . "' AND " . $this->tblFlightsUsers . ".flightNum = " . $this->tblFlights . ".flightNum AND " . $this->tblFlights . ".planeNum = " . $this->tblPlanes . ".planeNum";
 
         echo $sql;
 
