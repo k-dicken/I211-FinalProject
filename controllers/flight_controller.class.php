@@ -49,14 +49,10 @@ class FlightController {
         $from = trim($_GET['from']);
         $depart = trim($_GET['depart']);
 
-//        $terms = array($to, $from, $depart);
-//
-//        foreach ($terms as $term) {
-//            //if search term is empty, list all flights
-//            if ($term == "") {
-//                $this->index();
-//            }
-//        }
+        if ($to == "" && $from == "" && $depart == "") {
+            $this->index();
+            exit();
+        }
 
         //search the database for matching flights
         $flights = $this->flightModel->search_flights($to, $from, $depart);

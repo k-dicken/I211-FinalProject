@@ -121,8 +121,6 @@ class FlightModel {
             $sql .= " AND date LIKE '%" . $depart . "%'";
         }
 
-        echo $sql;
-
         //execute the query
         $query = $this->dbConnection->query($sql);
 
@@ -155,8 +153,6 @@ class FlightModel {
 
         $sql = "SELECT * FROM " . $this->tblFlights . ", " . $this->tblPlanes . ", " . $this->tblFlightsUsers .
             " WHERE " . $this->tblFlightsUsers . ".userNum='" . $userNum . "' AND " . $this->tblFlightsUsers . ".flightNum = " . $this->tblFlights . ".flightNum AND " . $this->tblFlights . ".planeNum = " . $this->tblPlanes . ".planeNum";
-
-        echo $sql;
 
         //execute the query
         $query = $this->dbConnection->query($sql);

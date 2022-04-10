@@ -14,7 +14,9 @@ class FlightUser extends IndexView {
             <br>
             <br>
             <br>
+            <br>
             <p class="flight-search-title">Your Flights</p>
+            <br>
             <br>
             <br>
 

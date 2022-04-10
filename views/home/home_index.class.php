@@ -12,14 +12,16 @@ class HomeIndex extends IndexView {
             <div class="row">
                 <div class="input">
                     <label for="from">FROM</label>
-                    <input name="from" type="text" minlength="3" maxlength="3">
+                    <input id="from" name="from" type="text" minlength="3" maxlength="3">
+                    <div class="from-search"></div>
                 </div>
 
                 <p class="search-arrow">➝</p>
 
                 <div class="input">
                     <label for="to">TO</label>
-                    <input name="to" type="text" minlength="3" maxlength="3">
+                    <input id="to" name="to" type="text" minlength="3" maxlength="3">
+                    <div class="to-search"></div>
 
                 </div>
             </div>

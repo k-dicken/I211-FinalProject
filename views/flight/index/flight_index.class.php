@@ -57,5 +57,6 @@ class FlightIndex extends FlightIndexView {
         </div>
 
     <?php
+        parent::displayFooter();
     }
 }

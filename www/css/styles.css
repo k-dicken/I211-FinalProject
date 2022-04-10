@@ -138,6 +138,7 @@ header a:hover {
 
 #search {
     padding: 2% 6%;
+    margin-bottom: 40px;
 
     display: flex;
     justify-content: center;
@@ -203,9 +204,9 @@ header a:hover {
 /* FLIGHTS */
 
 #flights {
-    min-height: 80%;
+    min-height: 100%;
     width: 100%;
-    margin: 40px 0 100px 0;
+    margin: 0 0 100px 0;
 
     display: flex;
     align-items: center;
@@ -306,7 +307,6 @@ header a:hover {
         align-items: center;
         justify-content: center;
         flex-direction: column;
-
     }
 
     #user-login input {
@@ -384,19 +384,19 @@ header a:hover {
     }
 
     /* FOOTER STYLES */
-footer {
-    min-height: 50vh;
-    width: 100%;
-    padding: 20px 5%;
+    footer {
+        min-height: 50vh;
+        width: 100%;
+        padding: 20px 5%;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
 
-    color: white;
-    text-decoration: none;
-    text-align: center;
+        color: white;
+        text-decoration: none;
+        text-align: center;
 
-    background-color: steelblue;
-}
+        background-color: steelblue;
+    }
