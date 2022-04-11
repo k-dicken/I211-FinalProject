@@ -1,4 +1,8 @@
 <?php
+/*
+ * Author: Kylee Dicken
+ * Date: Apr 11, 2022
+ */
 
 class IndexView {
     static public function displayHeader($pageTitle, $color) {

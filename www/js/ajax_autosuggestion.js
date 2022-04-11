@@ -1,4 +1,9 @@
 /*
+ * Author: Kylee Dicken
+ * Date: Apr 11, 2022
+ */
+
+/*
  * This script contains AJAX methods
  */
 var xmlHttp;

@@ -1,4 +1,8 @@
 <?php
+/*
+ * Author: Kylee Dicken
+ * Date: Apr 11, 2022
+ */
 
 class User {
     private $userNum, $admin, $email, $password, $firstName, $lastName, $city, $state;

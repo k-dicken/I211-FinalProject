@@ -1,4 +1,8 @@
 <?php
+/*
+ * Author: Kylee Dicken
+ * Date: Apr 11, 2022
+ */
 
 class UserEdit extends IndexView {
     public function display($user) {
