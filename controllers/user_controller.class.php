@@ -41,7 +41,6 @@ class UserController {
     }
 
     public function detail($userNum) {
-
         $user = $this->userModel->view_user($userNum);
 
         if (!$user) {
@@ -53,6 +52,45 @@ class UserController {
 
         $view = new UserDetail();
         $view->display($user);
+    }
+
+    public function edit($userNum) {
+        $user = $this->userModel->view_user($userNum);
+
+        if (!$user) {
+            //display an error
+            $message = "There was a problem displaying the user userNum='" . $userNum . "'.";
+            $this->error($message);
+            return;
+        }
+
+        $view = new UserEdit();
+        $view->display($user);
+    }
+
+    public function update($userNum) {
+
+    }
+
+    public function create() {
+        $view = new UserCreate();
+        $view->display();
+    }
+
+    public function logout() {
+        session_start();
+
+        //1. unset all the session variables
+        $_SESSION = array();
+
+        //2. delete the session cookie
+        setcookie(session_name(), '', time()-3600);
+
+        //3. destroy the session
+        session_destroy();
+
+        header("Location:" . BASE_URL . "user/login"); /* Redirect browser */
+        exit();
     }
 
 }

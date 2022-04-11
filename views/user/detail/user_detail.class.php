@@ -12,6 +12,15 @@ class UserDetail extends IndexView {
 
         parent::displayHeader($firstName . " " . $lastName, "black");
 
+        if ($userNum != $_SESSION['userNum']) {
+            if (isset($_SESSION['userNum'])) {
+                header("Location:" . BASE_URL . "user/detail/" . $_SESSION['userNum']); /* Redirect browser */
+                exit();
+            } else {
+                header("Location:" . BASE_URL . "user/login"); /* Redirect browser */
+                exit();
+            }
+        }
         ?>
 
         <div id="user">
@@ -19,8 +28,15 @@ class UserDetail extends IndexView {
             <p class="user-email"><?= $email ?></p>
             <p class="user-email"><?= $city . ", " . $state ?></p>
 
+            <br><br>
+
             <a class="user-button" href="<?= BASE_URL ?>flight/user/<?= $userNum ?>">View Flights</a>
-            <a class="user-delete" href="<?= BASE_URL ?>user/delete/<?= $userNum ?>">Delete Account</a>
+            <br>
+            <a class="user-button" href="<?= BASE_URL ?>user/edit/<?= $userNum ?>">Edit Profile</a>
+
+            <br>
+
+            <a class="red-link position-bottom" href="<?= BASE_URL ?>user/logout">Logout</a>
 
             <br><br>
         </div>

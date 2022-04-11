@@ -22,7 +22,7 @@ class UserLogin extends IndexView {
 
             <button type="submit">Login</button>
 
-            <a href="<?= BASE_URL ?>user/create">Create Account</a>
+            <a class="position-bottom" href="<?= BASE_URL ?>user/create">Create Account</a>
         </form>
 
         <?php

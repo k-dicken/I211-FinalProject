@@ -5,7 +5,10 @@ class FlightUser extends IndexView {
         parent::displayHeader("Your Flights", "black");
 
         if ($flights === 0) {
-            echo "<br><br><p>No Flights were found.</p>";
+            echo "<div class='full'>
+                        <p class='self-center'>No flights were found.</p><br>
+                        <a class='grey-link' href='" . BASE_URL . "flight/index'>Find Flights</a>
+                    </div>";
         } else {
 
             ?>

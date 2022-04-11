@@ -67,6 +67,55 @@ button:hover {
     font-size: x-large;
 }
 
+.grey-link {
+    color: slategrey;
+    text-decoration: none;
+}
+
+.grey-link:hover {
+    color: steelblue;
+}
+
+.red-link {
+    font-size: small;
+    color: crimson;
+    text-decoration: none;
+}
+
+.red-link:hover {
+    color: black;
+}
+
+.position-bottom {
+    position: absolute;
+    bottom: 10%;
+}
+
+.full {
+    min-height: 100vh;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.self-center {
+    margin: 0 auto;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.margin-reset {
+    margin: 0;
+}
+
 /* HEADER STYLES */
 header {
     min-height: 60px;
@@ -319,9 +368,6 @@ header a:hover {
     }
 
     #user-login a {
-        position: absolute;
-        bottom: 10%;
-
         color: steelblue;
     }
 
@@ -345,20 +391,20 @@ header a:hover {
         flex-direction: column;
     }
 
-    #user .user-name {
+    .user-large {
         font-size: xx-large;
         color: steelblue;
         margin-bottom: 10px;
     }
 
-    #user .user-email {
+    .user-medium {
         font-size: large;
         margin-bottom: 30px;
     }
 
     #user .user-button {
-        padding: 10px 40px;
-        margin: 50px auto 0 auto;
+        padding: 10px 60px;
+        margin: 0 auto;
 
         color: white;
         font-size: large;
@@ -372,15 +418,26 @@ header a:hover {
         background-color: steelblue;
     }
 
-    #user .user-delete {
-        font-size: small;
-        color: crimson;
-        text-decoration: none;
-        margin-top: 30px;
+    /* user create */
+
+    #user-create {
+        height: 100vh;
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
     }
 
-    #user .user-delete:hover {
-        color: black;
+    #user-create .full-input {
+        width: 400px;
+    }
+
+    #user-create .input-row {
+        width: 400px;
+        display: flex;
+        justify-content: space-between;
     }
 
     /* FOOTER STYLES */
