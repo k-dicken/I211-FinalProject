@@ -10,7 +10,7 @@ class UserCreate extends IndexView {
         parent::displayHeader("Create Account", "black");
         ?>
 
-        <form id="user-create" method="get" action="<?= BASE_URL ?>user/add">
+        <form id="user-create" method="post" action="<?= BASE_URL ?>user/add">
             <p class="user-large">Create Account</p>
 
             <br>

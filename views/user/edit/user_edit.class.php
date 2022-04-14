@@ -18,7 +18,7 @@ class UserEdit extends IndexView {
 
         ?>
 
-        <form id="user" method="get" action="<?= BASE_URL ?>user/update/<?= $userNum ?>">
+        <form id="user" method="post" action="<?= BASE_URL ?>user/update/<?= $userNum ?>">
             <div class="row">
                 <input name="firstName" class="user-medium" value="<?= $firstName ?>">&nbsp&nbsp&nbsp
                 <input name="lastName" class="user-medium" value="<?= $lastName ?>">

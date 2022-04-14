@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 07, 2022 at 05:38 PM
+-- Generation Time: Apr 14, 2022 at 02:31 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -53,6 +53,24 @@ INSERT INTO `flights` (`flightNum`, `planeNum`, `fromLocation`, `toLocation`, `d
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `flights_users`
+--
+
+CREATE TABLE `flights_users` (
+  `flightNum` int(11) NOT NULL,
+  `userNum` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `flights_users`
+--
+
+INSERT INTO `flights_users` (`flightNum`, `userNum`) VALUES
+(1, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `planes`
 --
 
@@ -79,6 +97,7 @@ INSERT INTO `planes` (`planeNum`, `airline`, `planeType`, `capacity`) VALUES
 
 CREATE TABLE `users` (
   `userNum` int(9) NOT NULL,
+  `admin` tinyint(1) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(50) NOT NULL,
   `firstName` char(100) NOT NULL,
@@ -91,8 +110,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`userNum`, `email`, `password`, `firstName`, `lastName`, `city`, `state`) VALUES
-(1, 'admin@skyline.co', 'admin', 'Admin', 'User', 'Indianapolis', 'IN');
+INSERT INTO `users` (`userNum`, `admin`, `email`, `password`, `firstName`, `lastName`, `city`, `state`) VALUES
+(1, 1, 'admin@skyline.co', 'admin', 'Admin', 'User', 'Indianapolis', 'IN'),
+(2, 0, 'sample@skyline.co', 'sample', 'Sample', 'User', 'Indianapolis', 'IN');
 
 --
 -- Indexes for dumped tables
@@ -103,6 +123,12 @@ INSERT INTO `users` (`userNum`, `email`, `password`, `firstName`, `lastName`, `c
 --
 ALTER TABLE `flights`
   ADD PRIMARY KEY (`flightNum`);
+
+--
+-- Indexes for table `flights_users`
+--
+ALTER TABLE `flights_users`
+  ADD PRIMARY KEY (`flightNum`,`userNum`);
 
 --
 -- Indexes for table `planes`
@@ -136,7 +162,7 @@ ALTER TABLE `planes`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userNum` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `userNum` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

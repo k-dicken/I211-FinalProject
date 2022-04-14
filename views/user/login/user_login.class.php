@@ -15,7 +15,7 @@ class UserLogin extends IndexView {
 
         ?>
 
-        <form id="user-login" method="get" action="<?= BASE_URL ?>user/verify">
+        <form id="user-login" method="post" action="<?= BASE_URL ?>user/verify">
             <label for="email">Email<span>*</span></label>
             <input name="email" type="email" required>
 

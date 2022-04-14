@@ -29,9 +29,9 @@ class UserDetail extends IndexView {
         ?>
 
         <div id="user">
-            <p class="user-name"><?= $firstName . " " . $lastName ?></p>
-            <p class="user-email"><?= $email ?></p>
-            <p class="user-email"><?= $city . ", " . $state ?></p>
+            <p class="user-large"><?= $firstName . " " . $lastName ?></p>
+            <p class="user-medium"><?= $email ?></p>
+            <p class="user-medium"><?= $city . ", " . $state ?></p>
 
             <br><br>
 

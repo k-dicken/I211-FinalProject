@@ -94,4 +94,68 @@ class UserModel {
 
         return $user;
     }
+
+    public function update_user($userNum) {
+        //if the script did not receive post data, display an error message and then end the script immediately
+        if (!filter_has_var(INPUT_POST, 'firstName') ||
+            !filter_has_var(INPUT_POST, 'lastName') ||
+            !filter_has_var(INPUT_POST, 'email') ||
+            !filter_has_var(INPUT_POST, 'city') ||
+            !filter_has_var(INPUT_POST, 'state')) {
+
+            return false;
+        }
+
+        //retrieve data for the new movie; data are sanitized and escaped for security.
+        $firstName = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'firstName', FILTER_SANITIZE_STRING)));
+        $lastName = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'lastName', FILTER_SANITIZE_STRING)));
+        $email = $this->dbConnection->real_escape_string(filter_input(INPUT_POST, 'email', FILTER_DEFAULT));
+        $city = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'city', FILTER_SANITIZE_STRING)));
+        $state = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'state', FILTER_SANITIZE_STRING)));
+
+        //query string for update
+        $sql = "UPDATE " . $this->tblUsers .
+            " SET firstName='$firstName', lastName='$lastName', email='$email', city='$city', "
+            . "state='$state' WHERE userNum='$userNum'";
+
+        //execute the query
+        return $this->dbConnection->query($sql);
+    }
+
+    public function add_user() {
+        //if the script did not receive post data, display an error message and then end the script immediately
+        if (!filter_has_var(INPUT_POST, 'firstName') ||
+            !filter_has_var(INPUT_POST, 'lastName') ||
+            !filter_has_var(INPUT_POST, 'email') ||
+            !filter_has_var(INPUT_POST, 'password') ||
+            !filter_has_var(INPUT_POST, 'city') ||
+            !filter_has_var(INPUT_POST, 'state')) {
+
+            return false;
+        }
+
+        //retrieve data for the new movie; data are sanitized and escaped for security.
+        $firstName = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'firstName', FILTER_SANITIZE_STRING)));
+        $lastName = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'lastName', FILTER_SANITIZE_STRING)));
+        $email = $this->dbConnection->real_escape_string(filter_input(INPUT_POST, 'email', FILTER_DEFAULT));
+        $password = $this->dbConnection->real_escape_string(filter_input(INPUT_POST, 'password', FILTER_DEFAULT));
+        $city = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'city', FILTER_SANITIZE_STRING)));
+        $state = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'state', FILTER_SANITIZE_STRING)));
+
+        //query string for update
+        $sql = "INSERT INTO `users`(`userNum`, `admin`, `email`, `password`, `firstName`, `lastName`, `city`, `state`)
+                VALUES (null,0,'". $email . "','" . $password . "','" . $firstName . "','" . $lastName . "','" . $city . "','" . $state . "')";
+
+        echo $sql;
+
+        //execute the query
+        return $this->dbConnection->query($sql);
+    }
+
+    public function delete_user($userNum) {
+        $sql = "DELETE FROM `users` WHERE userNum = '" . $userNum . "'";
+
+        //execute the query
+        $this->dbConnection->query($sql);
+    }
 }

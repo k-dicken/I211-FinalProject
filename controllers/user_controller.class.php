@@ -20,8 +20,8 @@ class UserController {
 
     public function verify() {
         //retrieve query terms from search form
-        $email = trim($_GET['email']);
-        $password = trim($_GET['password']);
+        $email = trim($_POST['email']);
+        $password = trim($_POST['password']);
 
         //search the database for matching movies
         $user = $this->userModel->verify_user($email, $password);
@@ -73,13 +73,43 @@ class UserController {
     }
 
     public function update($userNum) {
+        //update the user
+        $update = $this->userModel->update_user($userNum);
 
+        if (!$update) {
+            //handle errors
+            $message = "There was a problem updating the user id='" . $userNum . "'.";
+            $this->error($message);
+            return;
+        }
+
+        //display the updated user details
+        $user = $this->userModel->view_user($userNum);
+
+        $view = new UserDetail();
+        $view->display($user);
     }
 
     public function create() {
         $view = new UserCreate();
         $view->display();
     }
+
+
+    public function add() {
+        //update the user
+        $add = $this->userModel->add_user();
+
+        if (!$add) {
+            //handle errors
+            $message = "There was a problem creating your account";
+            $this->error($message);
+            return;
+        }
+
+        $this->verify();
+    }
+
 
     public function logout() {
         session_start();
@@ -94,6 +124,13 @@ class UserController {
         session_destroy();
 
         header("Location:" . BASE_URL . "user/login"); /* Redirect browser */
+        exit();
+    }
+
+    public function delete($userNum) {
+        $this->userModel->delete_user($userNum);
+
+        header("Location:" . BASE_URL . "user/login/"); /* Redirect browser */
         exit();
     }
 
