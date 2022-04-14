@@ -186,5 +186,14 @@ class FlightModel {
         return $flights;
     }
 
+    public function add_user() {
+        //check if there are post values
+        
+        //retrieve post values
+
+        //create insert sql statement
+
+        //run query
+    }
 
 }

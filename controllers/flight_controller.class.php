@@ -90,8 +90,16 @@ class FlightController {
     }
 
     public function create() {
-
         $create = new FlightCreate();
         $create->display();
+    }
+
+    public function add() {
+        //run model add user function
+
+        //check for errors
+
+        //run controller's index function
+        $this->index();
     }
 }
