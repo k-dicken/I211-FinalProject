@@ -88,4 +88,10 @@ class FlightController {
         $search = new FlightUser();
         $search->display($flights);
     }
+
+    public function create() {
+
+        $create = new FlightCreate();
+        $create->display();
+    }
 }

@@ -16,17 +16,17 @@ class UserCreate extends IndexView {
             <br>
             <br>
 
-            <input name="firstName" placeholder="First Name" class="user-medium full-input">
+            <input name="firstName" placeholder="First Name*" class="user-medium full-input" required>
             <br>
-            <input name="lastName" placeholder="Last Name" class="user-medium full-input">
+            <input name="lastName" placeholder="Last Name*" class="user-medium full-input" required>
             <br>
-            <input name="email" placeholder="Email" class="user-medium full-input">
+            <input name="email" placeholder="Email*" class="user-medium full-input" required>
             <br>
-            <input name="password" placeholder="Password" class="user-medium full-input">
+            <input name="password" placeholder="Password*" class="user-medium full-input" required>
             <br>
             <div class="input-row">
-                <input name="city" placeholder="City" class="user-medium" style="width: 80%">&nbsp&nbsp&nbsp
-                <input name="state" placeholder="ST" class="user-medium" size="2" maxlength="2">
+                <input name="city" placeholder="City*" class="user-medium" style="width: 80%" required>&nbsp&nbsp&nbsp
+                <input name="state" placeholder="ST*" class="user-medium" size="2" maxlength="2" required>
             </div>
 
             <br>
