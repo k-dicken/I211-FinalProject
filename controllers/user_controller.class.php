@@ -118,7 +118,8 @@ class UserController {
         $_SESSION = array();
 
         //2. delete the session cookie
-        setcookie(session_name(), '', time()-3600);
+        setcookie(session_name('userNum'), '', time()-3600);
+        setcookie(session_name('admin'), '', time()-3600);
 
         //3. destroy the session
         session_destroy();
@@ -129,6 +130,18 @@ class UserController {
 
     public function delete($userNum) {
         $this->userModel->delete_user($userNum);
+
+        session_start();
+
+        //1. unset all the session variables
+        $_SESSION = array();
+
+        //2. delete the session cookie
+        setcookie(session_name('userNum'), '', time()-3600);
+        setcookie(session_name('admin'), '', time()-3600);
+
+        //3. destroy the session
+        session_destroy();
 
         header("Location:" . BASE_URL . "user/login/"); /* Redirect browser */
         exit();
