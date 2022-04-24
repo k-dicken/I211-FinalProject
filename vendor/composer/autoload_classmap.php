@@ -16,6 +16,7 @@ return array(
     'FlightController' => $baseDir . '/controllers/flight_controller.class.php',
     'FlightCreate' => $baseDir . '/views/flight/create/flight_create.class.php',
     'FlightDetail' => $baseDir . '/views/flight/detail/flight_detail.class.php',
+    'FlightEdit' => $baseDir . '/views/flight/edit/flight_edit.class.php',
     'FlightIndex' => $baseDir . '/views/flight/index/flight_index.class.php',
     'FlightIndexView' => $baseDir . '/views/flight/flight_index_view.class.php',
     'FlightModel' => $baseDir . '/models/flight_model.class.php',

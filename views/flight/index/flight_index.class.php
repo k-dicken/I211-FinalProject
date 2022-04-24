@@ -10,6 +10,15 @@ class FlightIndex extends FlightIndexView {
 
     public function display($flights) {
         parent::displayHeader("Flights", "black");
+
+        session_start();
+
+        if (isset($_SESSION['userNum'])
+            && isset($_SESSION['admin'])) {
+
+            $userNum = $_SESSION['userNum'];
+            $admin = $_SESSION['admin'];
+        }
         ?>
 
         <div id="flights">
@@ -28,7 +37,7 @@ class FlightIndex extends FlightIndexView {
                         $departTime = substr($flight->getDepartTime(), 0, 5);
                         $arriveTime = substr($flight->getArriveTime(), 0, 5);
 
-                        $URL = BASE_URL . "flight/detail/" . $flightNum;
+                        $URL = BASE_URL;
 
                         echo "<div class='flight' href='$URL'>
                                 <p style='font-size: medium; margin-bottom: 6px'>$date</p>
@@ -44,9 +53,18 @@ class FlightIndex extends FlightIndexView {
                                 </div>
                                 <div class='flight-section'>
                                     <p class='flight-availability'>$availability Seats Available</p>
-                                    <a class='flight-details' href='$URL'>Learn More</a>
+                                    <a class='flight-details' href='$URL" . "flight/detail/$flightNum'>Learn More</a>
                                 </div>
+                                <br>";
+
+                        if ($admin == 1) {
+                            echo "<div style='display: flex'> 
+                                    <a class='grey-link' href='$URL" . "flight/edit/$flightNum'>Edit</a>&nbsp&nbsp&nbsp&nbsp
+                                    <a class='red-link' href='$URL" . "flight/delete/$flightNum'>Delete</a>
                                 </div>";
+                        }
+
+                        echo "</div>";
                     }
                 }
 

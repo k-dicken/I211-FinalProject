@@ -10,6 +10,15 @@ class FlightDetail extends IndexView {
 
         parent::displayHeader("Flights", "white");
 
+        session_start();
+
+        if (isset($_SESSION['userNum'])
+            && isset($_SESSION['admin'])) {
+
+            $userNum = $_SESSION['userNum'];
+            $admin = $_SESSION['admin'];
+        }
+
         $flightNum = $flight->getFlightNum();
         $date = $flight->getDate();
         $airline = $flight->getAirline();
@@ -22,6 +31,8 @@ class FlightDetail extends IndexView {
         $availability = $flight->getAvailability();
         $gate = $flight->getGate();
         $status = $flight->getStatus();
+
+        $URL = BASE_URL;
 
         echo "<div id='flight-details'>
             <div class='flight-details-section'>
@@ -55,8 +66,15 @@ class FlightDetail extends IndexView {
                 <br>
                 <br>
                 <button>PURCHASE TICKET</button>
-            </div>
-    </div>"
+                <br><br>";
+
+            if ($admin == 1) {
+                echo "<a class='grey-link' href='$URL" . "flight/edit/$flightNum'>Edit</a>&nbsp
+                      <a class='red-link' href='$URL" . "flight/delete/$flightNum'>Delete</a>";
+            }
+
+            echo "</div>
+    </div>";
 ?>
 
 

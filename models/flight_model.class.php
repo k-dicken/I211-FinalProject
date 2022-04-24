@@ -186,14 +186,21 @@ class FlightModel {
         return $flights;
     }
 
-    public function add_user() {
+    public function add_flights() {
         //check if there are post values
-        
+
         //retrieve post values
 
         //create insert sql statement
 
         //run query
+    }
+
+    public function delete_flights($flightNum) {
+        $sql = "DELETE FROM `flights` WHERE flightNum = '" . $flightNum . "'";
+
+        //execute the query
+        $this->dbConnection->query($sql);
     }
 
 }

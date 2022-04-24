@@ -20,7 +20,8 @@ class FlightIndexView extends IndexView {
                 <div class="sub-section row">
                     <div class="input destination-input">
                         <label for="from">FROM</label>
-                        <input name="from" value="<?= trim($_GET['from']) ?>" type="text" minlength="3" maxlength="3">
+                        <input name="from" id="searchBoxObj" value="<?= trim($_GET['from']) ?>" type="text" minlength="3" maxlength="3">
+                        <div id="suggestionBoxObj"></div>
                     </div>
                     <p class="search-arrow">➝</p>
                     <div class="input destination-input">

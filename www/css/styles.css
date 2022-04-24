@@ -302,14 +302,14 @@ header a:hover {
     margin-bottom: 16px;
 }
 
-.flight a {
-    color: steelblue;
-    text-decoration: none;
-}
-
 .flight-title {
     font-size: xx-large;
     color: steelblue;
+}
+
+.flight-details {
+    color: steelblue;
+    text-decoration: none;
 }
 
 .flight-search-title {

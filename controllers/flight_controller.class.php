@@ -72,6 +72,23 @@ class FlightController {
         $search->display($to, $from, $depart, $flights);
     }
 
+    //autosuggestion
+    public function suggest($term) {
+        //retrieve query terms
+        $query_term = urldecode(trim($term));
+        $flights = $this->flightModel->search_movie($query_term);
+
+        //retrieve all movie titles and store them in an array
+        $titles = array();
+        if ($flights) {
+            foreach ($flights as $flight) {
+                $flight[] = $flight->getFromLocation();
+            }
+        }
+
+        echo json_encode($flight);
+    }
+
     //search flights
     public function user($userNum) {
         //search the database for matching flights
@@ -89,17 +106,45 @@ class FlightController {
         $search->display($flights);
     }
 
+    public function edit($flightNum) {
+        //retrieve the specific flight
+        $flight = $this->flightModel->view_flight($flightNum);
+
+        if (!$flight) {
+            //display an error
+            $message = "There was a problem displaying the flight flightNum='" . $flightNum . "'.";
+            $this->error($message);
+            return;
+        }
+
+        //display flights details
+        $view = new FlightEdit();
+        $view->display($flight);
+    }
+
+    public function update() {
+        //TODO: controller update function
+    }
+
     public function create() {
         $create = new FlightCreate();
         $create->display();
     }
 
     public function add() {
+        //TODO: controller add function
         //run model add user function
 
         //check for errors
 
         //run controller's index function
         $this->index();
+    }
+
+    public function delete($flightNum) {
+        $this->flightModel->delete_flights($flightNum);
+
+        header("Location:" . BASE_URL . "flight/index"); /* Redirect browser */
+        exit();
     }
 }
