@@ -83,6 +83,7 @@ class IndexView {
             <br>
             <p class="footer-copyright">Copyright Skyline &copy 2022</p>
         </footer>
+        <script type="text/javascript" src="<?= BASE_URL ?>/www/js/ajax_autosuggestion.js"></script>
         </body>
         </html>
 

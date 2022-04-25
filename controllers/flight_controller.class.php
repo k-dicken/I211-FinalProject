@@ -73,20 +73,29 @@ class FlightController {
     }
 
     //autosuggestion
-    public function suggest($term) {
+    public function suggest($type, $term) {
         //retrieve query terms
         $query_term = urldecode(trim($term));
-        $flights = $this->flightModel->search_movie($query_term);
 
-        //retrieve all movie titles and store them in an array
-        $titles = array();
+        if ($type === "From") {
+            $flights = $this->flightModel->search_flights(null, $query_term, null);
+        } else if ($type === "To") {
+            $flights = $this->flightModel->search_flights($query_term, null, null);
+        }
+
+        //retrieve all suggested words and store them in an array
+        $suggest = array();
         if ($flights) {
             foreach ($flights as $flight) {
-                $flight[] = $flight->getFromLocation();
+                if ($type === "From") {
+                    $suggest[] = $flight->getFromLocation();
+                } else if ($type === "To") {
+                    $suggest[] = $flight->getToLocation();
+                }
             }
         }
 
-        echo json_encode($flight);
+        echo json_encode($suggest);
     }
 
     //search flights

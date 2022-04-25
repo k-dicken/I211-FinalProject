@@ -14,19 +14,18 @@ class HomeIndex extends IndexView {
         <form id="search" class="search-home" method="get" action="<?= BASE_URL ?>flight/search">
             <br>
             <div class="row">
-                <div class="input">
+                <div class="input home-destination-input">
                     <label for="from">FROM</label>
-                    <input id="from" name="from" type="text" minlength="3" maxlength="3">
-                    <div class="from-search"></div>
+                    <input name="from" id="searchtextboxFrom" data-searchtype="From" value="<?= trim($_GET['from']) ?>" type="text" minlength="3" maxlength="3" autocomplete="off" onkeyup="handleKeyUp(event)" onclick="getSearchType('From')">
+                    <div id="suggestionDivFrom" class="suggestionDiv"></div>
                 </div>
 
                 <p class="search-arrow">➝</p>
 
-                <div class="input">
+                <div class="input home-destination-input">
                     <label for="to">TO</label>
-                    <input id="to" name="to" type="text" minlength="3" maxlength="3">
-                    <div class="to-search"></div>
-
+                    <input name="to" id="searchtextboxTo" data-searchtype="To" value="<?= trim($_GET['to']) ?>" type="text" minlength="3" maxlength="3" autocomplete="off" onkeyup="handleKeyUp(event)" onclick="getSearchType('To')">
+                    <div id="suggestionDivTo" class="suggestionDiv"></div>
                 </div>
             </div>
 

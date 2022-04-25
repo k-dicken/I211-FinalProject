@@ -35,7 +35,8 @@ p {
 a,
 input,
 label,
-button {
+button,
+span {
     font-family: FreeMono, monospace;
 }
 
@@ -248,7 +249,42 @@ header a:hover {
 
 #search .destination-input {
     width: 140px;
+
+    position: relative;
 }
+
+.home-destination-input {
+    width: 40%;
+    position: relative;
+}
+
+/* search suggestion */
+
+.suggestionDiv {
+    top: 62%;
+    position: absolute;
+
+    width: 100%;
+
+    background-color: lightgrey;
+}
+
+.suggestionDiv span {
+    padding: 4px 0;
+}
+
+/*.suggestionDiv-home {*/
+/*    top: 62%;*/
+/*    position: absolute;*/
+
+/*    width: 100%;*/
+
+/*    background-color: lightgrey;*/
+/*}*/
+
+/*.suggestionDiv-home span {*/
+/*    padding: 4px 0;*/
+/*}*/
 
 /* FLIGHTS */
 

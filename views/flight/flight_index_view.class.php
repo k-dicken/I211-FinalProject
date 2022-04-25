@@ -20,13 +20,14 @@ class FlightIndexView extends IndexView {
                 <div class="sub-section row">
                     <div class="input destination-input">
                         <label for="from">FROM</label>
-                        <input name="from" id="searchBoxObj" value="<?= trim($_GET['from']) ?>" type="text" minlength="3" maxlength="3">
-                        <div id="suggestionBoxObj"></div>
+                        <input name="from" id="searchtextboxFrom" data-searchtype="From" value="<?= trim($_GET['from']) ?>" type="text" minlength="3" maxlength="3" autocomplete="off" onkeyup="handleKeyUp(event)" onclick="getSearchType('From')">
+                        <div id="suggestionDivFrom" class="suggestionDiv"></div>
                     </div>
                     <p class="search-arrow">➝</p>
                     <div class="input destination-input">
                         <label for="to">TO</label>
-                        <input name="to" value="<?= trim($_GET['to']) ?>" type="text" minlength="3" maxlength="3">
+                        <input name="to" id="searchtextboxTo" data-searchtype="To" value="<?= trim($_GET['to']) ?>" type="text" minlength="3" maxlength="3" autocomplete="off" onkeyup="handleKeyUp(event)" onclick="getSearchType('To')">
+                        <div id="suggestionDivTo" class="suggestionDiv"></div>
                     </div>
                 </div>
 
