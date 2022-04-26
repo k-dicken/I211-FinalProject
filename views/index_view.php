@@ -8,6 +8,9 @@ class IndexView {
     static public function displayHeader($pageTitle, $color) {
         session_start();
 
+        $admin = "";
+        $userNum = "";
+
         if (isset($_SESSION['userNum'])
             && isset($_SESSION['admin'])) {
 

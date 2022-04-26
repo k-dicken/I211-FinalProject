@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 14, 2022 at 02:31 AM
+-- Generation Time: Apr 26, 2022 at 07:12 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -48,7 +48,8 @@ CREATE TABLE `flights` (
 INSERT INTO `flights` (`flightNum`, `planeNum`, `fromLocation`, `toLocation`, `date`, `departTime`, `arriveTime`, `gate`, `status`, `availability`) VALUES
 (1, 1, 'IND', 'DWA', '2022-04-09', '20:40:00.0000', '01:53:00.0000', '25B', 'On-Time', 200),
 (2, 2, 'IND', 'FLG', '2022-04-07', '10:40:00.0000', '12:14:00.0000', '56A', 'Delayed', 50),
-(3, 1, 'IND', 'ASD', '2022-04-07', '17:23:00.0000', '12:58:00.0000', '01A', 'On-Time', 75);
+(3, 1, 'IND', 'ASD', '2022-04-07', '17:23:00.0000', '12:58:00.0000', '01A', 'On-Time', 75),
+(4, 2, 'DWA', 'IND', '2022-04-30', '10:40:00.0000', '12:58:00.0000', '16D', 'On-Time', 50);
 
 -- --------------------------------------------------------
 
@@ -112,7 +113,12 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`userNum`, `admin`, `email`, `password`, `firstName`, `lastName`, `city`, `state`) VALUES
 (1, 1, 'admin@skyline.co', 'admin', 'Admin', 'User', 'Indianapolis', 'IN'),
-(2, 0, 'sample@skyline.co', 'sample', 'Sample', 'User', 'Indianapolis', 'IN');
+(2, 0, 'sample@skyline.co', 'sample', 'Sample', 'User', 'Indianapolis', 'IN'),
+(3, 0, 'kdicken@iu.edu', 'test', 'Kylee', 'Dicken', 'Indianapolis', 'IN'),
+(4, 0, 'test@skyline.co', 'test@skyline.co', 'Test', 'User', 'Indianapolis', 'IN'),
+(5, 0, 'test@skyline.co', 'test@skyline.co', 'Test', 'User', 'Indianapolis', 'IN'),
+(6, 0, 'user@iu.edu', 'user', 'User', 'Student', 'Indianapolis', 'IN'),
+(7, 0, 'admin@skyline.co', 'test', 'Kylee', 'Dicken', 'Indianapolis', 'IN');
 
 --
 -- Indexes for dumped tables
@@ -150,7 +156,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `flights`
 --
 ALTER TABLE `flights`
-  MODIFY `flightNum` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `flightNum` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `planes`
@@ -162,7 +168,7 @@ ALTER TABLE `planes`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userNum` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `userNum` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
