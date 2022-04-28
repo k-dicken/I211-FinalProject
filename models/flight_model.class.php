@@ -166,11 +166,11 @@ class FlightModel {
         if (!$query)
             return false;
 
-        //search succeeded, but no movie was found.
+        //search succeeded, but no flight was found.
         if ($query->num_rows == 0)
             return 0;
 
-        //search succeeded, and found at least 1 movie found.
+        //search succeeded, and found at least 1 flight found.
         //create an array to store all the returned movies
         $flights = array();
 
@@ -188,12 +188,12 @@ class FlightModel {
     }
 
     public function purchase_flight($flightNum, $userNum) {
-        $sql = "INSERT INTO `flights_users` (`flightNum`, `userNum`) VALUES ('$flightNum', '$userNum');
-                UPDATE `flights` SET `availability`= availability-1 WHERE flightNum='$flightNum';";
+        $sql = "INSERT INTO `flights_users` (`flightNum`, `userNum`) VALUES ('$flightNum', '$userNum');";
 
-        echo $sql;
-//        return $sql;
-        //execute the query
+        $this->dbConnection->query($sql);
+
+        $sql = "UPDATE `flights` SET `availability`= availability-1 WHERE flightNum='$flightNum';";
+
         return $this->dbConnection->query($sql);
     }
 
@@ -233,14 +233,65 @@ class FlightModel {
         return $this->dbConnection->query($sql);
     }
 
-    public function add_flights() {
+    public function add_flight() {
         //check if there are post values
+        if (!filter_has_var(INPUT_POST, 'date') ||
+            !filter_has_var(INPUT_POST, 'planeNum') ||
+            !filter_has_var(INPUT_POST, 'fromLocation') ||
+            !filter_has_var(INPUT_POST, 'toLocation') ||
+            !filter_has_var(INPUT_POST, 'departTime') ||
+            !filter_has_var(INPUT_POST, 'arriveTime') ||
+            !filter_has_var(INPUT_POST, 'availability') ||
+            !filter_has_var(INPUT_POST, 'gate') ||
+            !filter_has_var(INPUT_POST, 'status')) {
+
+            return false;
+        }
 
         //retrieve post values
+        $date = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'date', FILTER_DEFAULT)));
+        $planeNum = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'planeNum', FILTER_SANITIZE_NUMBER_INT)));
+        $fromLocation = $this->dbConnection->real_escape_string(filter_input(INPUT_POST, 'fromLocation', FILTER_SANITIZE_STRING));
+        $toLocation = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'toLocation', FILTER_SANITIZE_STRING)));
+        $departTime = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'departTime', FILTER_DEFAULT)));
+        $arriveTime = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'arriveTime', FILTER_DEFAULT)));
+        $availability = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'availability', FILTER_SANITIZE_NUMBER_INT)));
+        $gate = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'gate', FILTER_SANITIZE_STRING)));
+        $status = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'status', FILTER_SANITIZE_STRING)));
+
+
+            $sql = "SELECT * FROM planes WHERE planeNum='" . $planeNum ."'" ;
+
+            //execute the query
+            $query = $this->dbConnection->query($sql);
+
+            try {
+                // the search failed, return false.
+                if (!$query) {
+                   throw new QueryDatabaseException;
+                }
+
+                //search succeeded, but no flight was found.
+                if ($query->num_rows == 0) {
+                    throw new PlaneNumAuthenticationException;
+                }
+
+            } catch(QueryDatabaseException $e) {
+                echo $e->getDetails();
+                exit();
+
+            } catch(PlaneNumAuthenticationException $e) {
+                echo $e->getDetails();
+                exit();
+            }
 
         //create insert sql statement
+        $sql = "INSERT INTO `flights` 
+                (`flightNum`, `planeNum`, `fromLocation`, `toLocation`, `date`, `departTime`, `arriveTime`, `gate`, `status`, `availability`) 
+                VALUES (NULL, '$planeNum', '$fromLocation', '$toLocation', '$date', '$departTime', '$arriveTime', '$gate', '$status', '$availability')";
 
         //run query
+        return $this->dbConnection->query($sql);
     }
 
     public function delete_flights($flightNum) {

@@ -30,9 +30,13 @@ class Database {
         $this->objDBConnection = @new mysqli(
             $this->param['host'], $this->param['login'], $this->param['password'], $this->param['database']
         );
-        if (mysqli_connect_errno() != 0) {
-            $message = "Connecting database failed: " . mysqli_connect_error() . ".";
-            include 'error.php';
+
+        try {
+            if (mysqli_connect_errno() != 0) {
+                throw new DatabaseException();
+            }
+        } catch (DatabaseException $e) {
+            echo $e->getDetails();
             exit();
         }
     }
@@ -47,13 +51,16 @@ class Database {
     //this function returns the database connection object
     public function getConnection() {
         try {
-            if (!$this->objDBConnection) {
-                throw new DatabaseException();
-            } else {
+            if ($this->objDBConnection) {
                 return $this->objDBConnection;
+                // exit();
+            } else {
+                throw new DatabaseException();
+
             }
         } catch (DatabaseException $e) {
-            $message = $e->getDetails();
+            $e->getDetails();
+           // exit();
         }
     }
 

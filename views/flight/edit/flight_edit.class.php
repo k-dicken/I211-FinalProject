@@ -27,7 +27,7 @@ class FlightEdit extends IndexView {
                 <br>
                 <br>
                 <label for='date'>Date</label>
-                <input name='date' type='date' value='$date'>
+                <input name='date' type='date' value='$date' placeholder='YYYY-MM-DD'>
                 <br>
                 <label for='planeNum'>Plane Number</label>
                 <input name='planeNum' class='flight-input' value='$planeNum'>
@@ -59,7 +59,7 @@ class FlightEdit extends IndexView {
                 <br>
                 <br>
                 <br>
-                <button>SUBMIT</button>
+                <button>UPDATE</button>
                 <br>
                 <a class='red-link' style='margin: 0 auto' href='$URL" . "flight/delete/$flightNum'>Delete</a>
                 <br>

@@ -142,6 +142,15 @@ class UserModel {
         $city = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'city', FILTER_SANITIZE_STRING)));
         $state = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'state', FILTER_SANITIZE_STRING)));
 
+        try {
+            if (!preg_match("/^[_a-z0-9-]+(.[_a-z0-9-]+)@[a-z0-9-]+(.[a-z0-9-]+)(.[a-z]{2,3})$/i", $email)) {
+                throw new EmailException();
+            }
+        } catch (EmailException $e){
+            echo $e->getDetails();
+            exit();
+        }
+
         //query string for update
         $sql = "INSERT INTO `users`(`userNum`, `admin`, `email`, `password`, `firstName`, `lastName`, `city`, `state`)
                 VALUES (null,0,'". $email . "','" . $password . "','" . $firstName . "','" . $lastName . "','" . $city . "','" . $state . "')";

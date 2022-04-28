@@ -182,10 +182,15 @@ class  FlightController {
     }
 
     public function add() {
-        //TODO: controller add function
-        //run model add user function
+        //add the user
+        $add = $this->flightModel->add_flight();
 
-        //check for errors
+        if (!$add) {
+            //handle errors
+            $message = "There was a problem creating the flight.";
+            $this->error($message);
+            return;
+        }
 
         //run controller's index function
         $this->index();

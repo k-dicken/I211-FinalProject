@@ -10,74 +10,54 @@
 class FlightCreate extends IndexView {
     public function display() {
 
-        parent::displayHeader("Create New Flights", "black");
-        ?>
+        parent::displayHeader("Flights", "white");
 
-        <form id="flight-create" method="get" action="<?= BASE_URL ?>flight/add">
-            <p class="flight-large">Create Flight</p>
+        $URL = BASE_URL;
 
-            <br>
-
-                <br><br>
-                <br>
-                <label>Departure Date:</label><br>
-                <input type="text" placeholder="YYYY-MM-DD"
-                       onfocus="(this.type='date')"
-                       onblur="(this.type='text')" class="user-medium full-input">
-
-                <br>
-
-                <label>Location:</label><br>
-                <div class="row">
-                    <input name="fromLocation" placeholder="From" class="user-medium full-input">
-                    &nbsp&nbsp&nbsp<p class='flight-margin' style='font-size: large'>➝</p>&nbsp&nbsp&nbsp
-                    <input name="toLocation" placeholder="To" class="user-medium full-input">
-                </div>
-
-                <br><br>
-                <label for="availability">Available Seats:</label>
-                <input name="availability" placeholder="Available Seats" class="user-medium full-input">
+        echo "<div id='flight-details'>
+            <form class='flight-form-section' method='post' action='$URL" . "flight/add/'>
+                <p class='flight-title' style='font-size: xx-large'>CREATE FLIGHT</p>
                 <br>
                 <br>
-                <label> Time:</label><br>
-                <input type="text" placeholder="Departure"
-                       onfocus="(this.type='time')"
-                       onblur="(this.type='text')" class="user-medium full-input">
+                <label for='date'>Date</label>
+                <input name='date' type='date' placeholder='YYYY-MM-DD' required>
+                <br>
+                <label for='planeNum'>Plane Number</label>
+                <input name='planeNum' class='flight-input' required>
+                <br>
+                <br>
+                <label for='fromLocation'>From</label>
+                <input name='fromLocation' class='flight-input flight-margin' type='text' minlength='3' maxlength='3' required>
+                <br>
+                <label for='toLocation'>To</label>
+                <input name='toLocation' class='flight-input' minlength='3' maxlength='3' required>
+                <br>
+                <br>
+                <label for='departTime'>Departs At</label>
+                <input name='departTime' class='flight-input' type='time' required>
+                <br>
+                <label for='arriveTime'>Arrives At</label>
+                <input name='arriveTime' class='flight-input' type='time' required>
+                <br>
+                <br>
+                <label for='availability'>Availability</label>
+                <input name='availability' class='flight-input' type='number' required>
+                <br>
+                <br>
+                <label for='gate'>Gate</label>
+                <input name='gate' class='flight-input' required>
+                <br>
+                <label for='status'>Status</label>
+                <input name='status' class='flight-input' required>
+                <br>
+                <br>
+                <br>
+                <button>CREATE</button>
+                <br>
+                <br>
+            </form>
+    </div>";
 
-                    <input type="text" placeholder="Arrival"
-                           onfocus="(this.type='time')"
-                           onblur="(this.type='text')" class="user-medium full-input">
-                    <br>
-                    <br>
-                    <label for="status">Gate Number:</label>
-                    <input name="gate" label="Gate Number:" placeholder="Gate Number" class="user-medium full-input">
-                    <br><br>
-                    <label for="status">Flight's Status:</label>
-                    <select name="status" id="status">
-                        <option value="on-time">On Time</option>
-                        <option value="delayed">Delayed</option>
-                        <option value="cancel">Canceled</option>
-                        <option value="depart">Departed</option>
-                        <option value="arrive">Arrived</option>
-                        <option value="in-air">In Air</option>
-                    </select>
-                    <br><br>
-
-
-                    <br>
-                    <br>
-
-                    <button>Create A New Fight</button>
-                    <br>
-                    <!--            <div class="row position-bottom">-->
-                    <!--                <p class="margin-reset">Already Have an Account?</p>&nbsp-->
-                    <!--                <a style="color: steelblue" href="-->
-                    <?//= BASE_URL ?><!--flight/create">Add Flight</a>-->
-                    <!--            </div>-->
-
-        </form>
-
-        <?php
         parent::displayFooter();
     }
 }
