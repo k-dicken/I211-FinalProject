@@ -46,7 +46,15 @@ class Database {
 
     //this function returns the database connection object
     public function getConnection() {
-        return $this->objDBConnection;
+        try {
+            if (!$this->objDBConnection) {
+                throw new DatabaseException();
+            } else {
+                return $this->objDBConnection;
+            }
+        } catch (DatabaseException $e) {
+            $message = $e->getDetails();
+        }
     }
 
     //returns the name of the table that stores flights

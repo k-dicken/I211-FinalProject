@@ -4,7 +4,7 @@
  * Date: Apr 11, 2022
  */
 
-class FlightController {
+class  FlightController {
     private $flightModel;
 
     //default constructor
