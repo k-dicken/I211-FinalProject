@@ -5,10 +5,11 @@
  */
 
 class Flight {
-    private $flightNum, $airline, $planeType, $fromLocation, $toLocation, $capacity, $date, $departTime, $arriveTime, $gate, $availability, $status;
+    private $flightNum, $planeNum, $airline, $planeType, $fromLocation, $toLocation, $capacity, $date, $departTime, $arriveTime, $gate, $availability, $status;
 
-    public function __construct($airline, $planeType, $fromLocation, $toLocation, $capacity, $date, $departTime, $arriveTime, $gate, $status, $availability)
+    public function __construct($planeNum, $airline, $planeType, $fromLocation, $toLocation, $capacity, $date, $departTime, $arriveTime, $gate, $status, $availability)
     {
+        $this->planeNum = $planeNum;
         $this->airline = $airline;
         $this->planeType = $planeType;
         $this->fromLocation = $fromLocation;
@@ -26,6 +27,11 @@ class Flight {
     public function getFlightNum()
     {
         return $this->flightNum;
+    }
+
+    public function getPlaneNum()
+    {
+        return $this->planeNum;
     }
 
     public function getAirline()

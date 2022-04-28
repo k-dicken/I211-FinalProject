@@ -115,6 +115,33 @@ class  FlightController {
         $search->display($flights);
     }
 
+    //assign user to flight
+    public function purchase($flightNum) {
+        session_start();
+
+        if (isset($_SESSION['userNum'])
+            && isset($_SESSION['admin'])) {
+
+            $userNum = $_SESSION['userNum'];
+            $admin = $_SESSION['admin'];
+        } else {
+            header(BASE_URL . "/user/login");
+            exit();
+        }
+
+        //retrieve the specific flight
+        $purchase = $this->flightModel->purchase_flight($flightNum, $userNum);
+
+        if (!$purchase) {
+            //handle errors
+            $message = "There was a problem purchase a flight on the flight num='" . $flightNum . "'.";
+            $this->error($message);
+            return;
+        }
+
+        self::user($userNum);
+    }
+
     public function edit($flightNum) {
         //retrieve the specific flight
         $flight = $this->flightModel->view_flight($flightNum);
@@ -131,8 +158,22 @@ class  FlightController {
         $view->display($flight);
     }
 
-    public function update() {
-        //TODO: controller update function
+    public function update($flightNum) {
+        //update the user
+        $update = $this->flightModel->update_flight($flightNum);
+
+        if (!$update) {
+            //handle errors
+            $message = "There was a problem updating the flight id='" . $flightNum . "'.";
+            $this->error($message);
+            return;
+        }
+
+        //display the updated flight details
+        $flight = $this->flightModel->view_flight($flightNum);
+
+        $view = new FlightDetail();
+        $view->display($flight);
     }
 
     public function create() {

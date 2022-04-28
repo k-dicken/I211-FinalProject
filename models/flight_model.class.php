@@ -63,7 +63,8 @@ class FlightModel {
 
         //loop through all rows in the returned record sets
         while ($obj = $query->fetch_object()) {
-            $flight = new Flight(stripslashes($obj->airline),
+            $flight = new Flight(stripslashes($obj->planeNum),
+                stripslashes($obj->airline),
                 stripslashes($obj->planeType),
                 stripslashes($obj->fromLocation),
                 stripslashes($obj->toLocation),
@@ -89,7 +90,7 @@ class FlightModel {
     public function view_flight($flightNum) {
         //the select sql statement
         $sql = "SELECT * FROM " . $this->tblFlights . ", " . $this->tblPlanes .
-            " WHERE " . $this->tblFlights . ".flightNum = 1 AND " . $this->tblFlights . ".planeNum = " . $this->tblPlanes . ".planeNum";
+            " WHERE " . $this->tblFlights . ".flightNum = $flightNum AND " . $this->tblFlights . ".planeNum = " . $this->tblPlanes . ".planeNum";
 
         //execute the query
         $query = $this->dbConnection->query($sql);
@@ -98,7 +99,7 @@ class FlightModel {
             $obj = $query->fetch_object();
 
             //create a flight object
-            $flight = new Flight(stripslashes($obj->airline), stripslashes($obj->planeType), stripslashes($obj->fromLocation), stripslashes($obj->toLocation), stripslashes($obj->capacity), stripslashes($obj->date), stripslashes($obj->departTime), stripslashes($obj->arriveTime), stripslashes($obj->gate), stripslashes($obj->status), stripslashes($obj->availability));
+            $flight = new Flight(stripslashes($obj->planeNum), stripslashes($obj->airline), stripslashes($obj->planeType), stripslashes($obj->fromLocation), stripslashes($obj->toLocation), stripslashes($obj->capacity), stripslashes($obj->date), stripslashes($obj->departTime), stripslashes($obj->arriveTime), stripslashes($obj->gate), stripslashes($obj->status), stripslashes($obj->availability));
 
             //set the id for the flight
             $flight->setFlightNum($obj->flightNum);
@@ -142,7 +143,7 @@ class FlightModel {
 
         //loop through all rows in the returned recordsets
         while ($obj = $query->fetch_object()) {
-            $flight = new Flight(stripslashes($obj->airline), stripslashes($obj->planeType), stripslashes($obj->fromLocation), stripslashes($obj->toLocation), stripslashes($obj->capacity), stripslashes($obj->date), stripslashes($obj->departTime), stripslashes($obj->arriveTime), stripslashes($obj->gate), stripslashes($obj->status), stripslashes($obj->availability));
+            $flight = new Flight(stripslashes($obj->planeNum), stripslashes($obj->airline), stripslashes($obj->planeType), stripslashes($obj->fromLocation), stripslashes($obj->toLocation), stripslashes($obj->capacity), stripslashes($obj->date), stripslashes($obj->departTime), stripslashes($obj->arriveTime), stripslashes($obj->gate), stripslashes($obj->status), stripslashes($obj->availability));
 
             //set the id for the movie
             $flight->setFlightNum($obj->flightNum);
@@ -175,7 +176,7 @@ class FlightModel {
 
         //loop through all rows in the returned recordsets
         while ($obj = $query->fetch_object()) {
-            $flight = new Flight(stripslashes($obj->airline), stripslashes($obj->planeType), stripslashes($obj->fromLocation), stripslashes($obj->toLocation), stripslashes($obj->capacity), stripslashes($obj->date), stripslashes($obj->departTime), stripslashes($obj->arriveTime), stripslashes($obj->gate), stripslashes($obj->status), stripslashes($obj->availability));
+            $flight = new Flight(stripslashes($obj->planeNum), stripslashes($obj->airline), stripslashes($obj->planeType), stripslashes($obj->fromLocation), stripslashes($obj->toLocation), stripslashes($obj->capacity), stripslashes($obj->date), stripslashes($obj->departTime), stripslashes($obj->arriveTime), stripslashes($obj->gate), stripslashes($obj->status), stripslashes($obj->availability));
 
             //set the id for the movie
             $flight->setFlightNum($obj->flightNum);
@@ -184,6 +185,52 @@ class FlightModel {
             $flights[] = $flight;
         }
         return $flights;
+    }
+
+    public function purchase_flight($flightNum, $userNum) {
+        $sql = "INSERT INTO `flights_users` (`flightNum`, `userNum`) VALUES ('$flightNum', '$userNum');
+                UPDATE `flights` SET `availability`= availability-1 WHERE flightNum='$flightNum';";
+
+        echo $sql;
+//        return $sql;
+        //execute the query
+        return $this->dbConnection->query($sql);
+    }
+
+    public function update_flight($flightNum) {
+        //if the script did not receive post data, display an error message and then end the script immediately
+        if (!filter_has_var(INPUT_POST, 'date') ||
+            !filter_has_var(INPUT_POST, 'planeNum') ||
+            !filter_has_var(INPUT_POST, 'fromLocation') ||
+            !filter_has_var(INPUT_POST, 'toLocation') ||
+            !filter_has_var(INPUT_POST, 'departTime') ||
+            !filter_has_var(INPUT_POST, 'arriveTime') ||
+            !filter_has_var(INPUT_POST, 'availability') ||
+            !filter_has_var(INPUT_POST, 'gate') ||
+            !filter_has_var(INPUT_POST, 'status')) {
+
+            return false;
+        }
+
+        //retrieve data for the new movie; data are sanitized and escaped for security.
+        $date = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'date', FILTER_DEFAULT)));
+        $planeNum = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'planeNum', FILTER_SANITIZE_NUMBER_INT)));
+        $fromLocation = $this->dbConnection->real_escape_string(filter_input(INPUT_POST, 'fromLocation', FILTER_SANITIZE_STRING));
+        $toLocation = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'toLocation', FILTER_SANITIZE_STRING)));
+        $departTime = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'departTime', FILTER_DEFAULT)));
+        $arriveTime = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'arriveTime', FILTER_DEFAULT)));
+        $availability = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'availability', FILTER_SANITIZE_NUMBER_INT)));
+        $gate = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'gate', FILTER_SANITIZE_STRING)));
+        $status = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'status', FILTER_SANITIZE_STRING)));
+
+        //query string for update
+        $sql = "UPDATE " . $this->tblFlights .
+            " SET planeNum='$planeNum', fromLocation='$fromLocation', toLocation='$toLocation', date='$date',
+            departTime='$departTime', arriveTime='$arriveTime', gate='$gate', status='$status', availability='$availability'
+            WHERE flightNum='$flightNum'";
+
+        //execute the query
+        return $this->dbConnection->query($sql);
     }
 
     public function add_flights() {

@@ -95,7 +95,6 @@ class UserController {
         $view->display();
     }
 
-
     public function add() {
         //update the user
         $add = $this->userModel->add_user();

@@ -146,8 +146,6 @@ class UserModel {
         $sql = "INSERT INTO `users`(`userNum`, `admin`, `email`, `password`, `firstName`, `lastName`, `city`, `state`)
                 VALUES (null,0,'". $email . "','" . $password . "','" . $firstName . "','" . $lastName . "','" . $city . "','" . $state . "')";
 
-        echo $sql;
-
         //execute the query
         return $this->dbConnection->query($sql);
     }

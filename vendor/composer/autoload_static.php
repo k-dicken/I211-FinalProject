@@ -18,6 +18,7 @@ class ComposerStaticInit06ef10d7858b7c538880ca8e3014b021
         'FlightCreate' => __DIR__ . '/../..' . '/views/flight/create/flight_create.class.php',
         'FlightDetail' => __DIR__ . '/../..' . '/views/flight/detail/flight_detail.class.php',
         'FlightEdit' => __DIR__ . '/../..' . '/views/flight/edit/flight_edit.class.php',
+        'FlightError' => __DIR__ . '/../..' . '/views/flight/error/flight_error.class.php',
         'FlightIndex' => __DIR__ . '/../..' . '/views/flight/index/flight_index.class.php',
         'FlightIndexView' => __DIR__ . '/../..' . '/views/flight/flight_index_view.class.php',
         'FlightModel' => __DIR__ . '/../..' . '/models/flight_model.class.php',

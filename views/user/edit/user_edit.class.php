@@ -20,14 +20,20 @@ class UserEdit extends IndexView {
 
         <form id="user" method="post" action="<?= BASE_URL ?>user/update/<?= $userNum ?>">
             <div class="row">
+                <label for="firstName">First Name</label>
                 <input name="firstName" class="user-medium" value="<?= $firstName ?>">&nbsp&nbsp&nbsp
+                <label for="lastName">Last Name</label>
                 <input name="lastName" class="user-medium" value="<?= $lastName ?>">
             </div>
             <br>
+            <label for="email">Email</label>
             <input name="email" class="user-medium" value="<?= $email ?>">
             <br>
             <div class="row">
+                <label for="city">City</label>
                 <input name="city" class="user-medium" value="<?= $city ?>">&nbsp&nbsp&nbsp
+
+                <label for="state">State</label>
                 <input name="state" class="user-medium" value="<?= $state ?>" size="2" maxlength="2">
             </div>
 

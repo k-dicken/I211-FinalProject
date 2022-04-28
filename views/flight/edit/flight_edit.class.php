@@ -6,6 +6,7 @@ class FlightEdit extends IndexView {
         parent::displayHeader("Flights", "white");
 
         $flightNum = $flight->getFlightNum();
+        $planeNum = $flight->getPlaneNum();
         $date = $flight->getDate();
         $airline = $flight->getAirline();
         $planeType = $flight->getPlaneType();
@@ -21,40 +22,48 @@ class FlightEdit extends IndexView {
         $URL = BASE_URL;
 
         echo "<div id='flight-details'>
-            <div class='flight-details-section'>
+            <form class='flight-form-section' method='post' action='$URL" . "flight/update/" . $flightNum ."'>
                 <p class='flight-title' style='font-size: xx-large'>EDIT FLIGHT</p>
-                <input value='$date'>
-                <br>
-                <input class='flight-input' value='$airline'>
-                <input class='flight-input' value='$planeType'>
                 <br>
                 <br>
+                <label for='date'>Date</label>
+                <input name='date' type='date' value='$date'>
                 <br>
-                <div class='flight-section flight-destination'>
-                    <input class='flight-input flight-margin' value='$fromLocation'>
-                    <p class='flight-margin' style='font-size: xx-large'>➝</p>
-                    <input class='flight-input' value='$toLocation'>
-                </div>
-                <div class='flight-section flight-times'>
-                    <input class='flight-input' value='$departTime'>
-                    <input class='flight-input' value='$arriveTime'>
-                </div>
+                <label for='planeNum'>Plane Number</label>
+                <input name='planeNum' class='flight-input' value='$planeNum'>
                 <br>
-                <div class='flight-section' style='width: 80%'>
-                    <input class='flight-input' value='$capacity'>
-                    <input class='flight-input' value='$gate'>
-                </div>
-                <div class='flight-section' style='width: 80%'>
-                    <input class='flight-input' value='$availability'>
-                    <input class='flight-input' value='$status'>
-                </div>
+                <br>
+                <label for='fromLocation'>From</label>
+                <input name='fromLocation' class='flight-input flight-margin' value='$fromLocation' type='text' minlength='3' maxlength='3'>
+                <br>
+                <label for='toLocation'>To</label>
+                <input name='toLocation' class='flight-input' value='$toLocation' minlength='3' maxlength='3'>
+                <br>
+                <br>
+                <label for='departTime'>Departs At</label>
+                <input name='departTime' class='flight-input' value='$departTime' type='time'>
+                <br>
+                <label for='arriveTime'>Arrives At</label>
+                <input name='arriveTime' class='flight-input' value='$arriveTime' type='time'>
+                <br>
+                <br>
+                <label for='availability'>Availability</label>
+                <input name='availability' class='flight-input' value='$availability' type='number'>
+                <br>
+                <br>
+                <label for='gate'>Gate</label>
+                <input name='gate' class='flight-input' value='$gate'>
+                <br>
+                <label for='status'>Status</label>
+                <input name='status' class='flight-input' value='$status'>
                 <br>
                 <br>
                 <br>
                 <button>SUBMIT</button>
                 <br>
-                <a class='red-link' href='$URL" . "flight/delete/$flightNum'>Delete</a>
-            </div>
+                <a class='red-link' style='margin: 0 auto' href='$URL" . "flight/delete/$flightNum'>Delete</a>
+                <br>
+            </form>
     </div>";
 
         parent::displayFooter();

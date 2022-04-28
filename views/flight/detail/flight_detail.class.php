@@ -65,7 +65,7 @@ class FlightDetail extends IndexView {
                 <br>
                 <br>
                 <br>
-                <button>PURCHASE TICKET</button>
+                <a class='button' href='$URL" . "flight/purchase/$flightNum'>PURCHASE TICKET</a>
                 <br><br>";
 
             if ($admin == 1) {

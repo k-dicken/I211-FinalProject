@@ -82,7 +82,7 @@ class IndexView {
             <p class="footer-address">12345 Skies Lane San Francisco, California 67890</p>
             <p class="footer-phone">(901) 123-4567</p>
             <br>
-            <p class="footer-credit">Project by<br>Kylee Dicken & Oluwatishe Elesinnla</p>
+            <p class="footer-credit">Project by<br>Kylee Dicken, Hannah Mayorga & Oluwatishe Elesinnla</p>
             <br>
             <p class="footer-copyright">Copyright Skyline &copy 2022</p>
         </footer>
