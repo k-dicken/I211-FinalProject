@@ -36,7 +36,8 @@ class Database {
                 throw new DatabaseException();
             }
         } catch (DatabaseException $e) {
-            echo $e->getDetails();
+            $message = $e->getDetails();
+            include('application/error.php');
             exit();
         }
     }
@@ -56,11 +57,11 @@ class Database {
                 // exit();
             } else {
                 throw new DatabaseException();
-
             }
         } catch (DatabaseException $e) {
-            $e->getDetails();
-           // exit();
+            $message = $e->getDetails();
+            include('application/error.php');
+            exit();
         }
     }
 

@@ -147,7 +147,8 @@ class UserModel {
                 throw new EmailException();
             }
         } catch (EmailException $e){
-            echo $e->getDetails();
+            $message = $e->getDetails();
+            include('application/error.php');
             exit();
         }
 

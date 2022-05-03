@@ -277,11 +277,13 @@ class FlightModel {
                 }
 
             } catch(QueryDatabaseException $e) {
-                echo $e->getDetails();
+                $message = $e->getDetails();
+                include('application/error.php');
                 exit();
 
             } catch(PlaneNumAuthenticationException $e) {
-                echo $e->getDetails();
+                $message = $e->getDetails();
+                include('application/error.php');
                 exit();
             }
 
